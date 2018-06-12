@@ -2,25 +2,22 @@
 % Please edit documentation in R/chainsaw.R
 \name{chainsaw}
 \alias{chainsaw}
-\title{Cut Phylogeny}
+\title{Function to cut phylogeny from present day species to a specified depth.}
 \usage{
-chainsaw(partition, ps, interval, depth)
+chainsaw(partition, ps, depth)
 }
 \arguments{
-\item{partition}{proportional abundance of \emph{types} in the
-subcommunity as a fraction of the metacommunity as a whole (in the
-phylogenetic case, this corresponds to the proportional abundance of
-terminal taxa).}
+\item{partition}{proportional abundance of types in the subcommunity as a 
+fraction of the metacommunity as a whole (in the phylogenetic case, this 
+corresponds to the proportional abundance of present day species)}
 
-\item{ps}{\code{phy_struct()} output.}
+\item{ps}{\code{phy_struct()} output}
 
-\item{interval}{proportion of total tree height to be conserved (taken as
+\item{depth}{proportion of total tree height to be conserved (taken as
 a proportion from the heighest tip). Describes how far back we go in the tree,
 with 0 marking the date of the most recent tip, and 1 (the default) marking
 the most recent common ancestor. Numbers greater than 1 extend the root of
-the tree.}
-
-\item{depth}{object length of total tree height to be conserved.}
+the tree}
 }
 \value{
 Returns an object of class \code{phy_struct} containing a new structural
@@ -28,7 +25,7 @@ matrix ('@structure').and the original phylogenetic parameters
 ('@parameters').
 }
 \description{
-Cut Phylogeny
+Function to cut phylogeny from present day species to a specified depth.
 }
 \examples{
 tree <- ape::rtree(n = 5)
@@ -38,9 +35,9 @@ row.names(partition) <- tree$tip.label
 partition <- partition / sum(partition)
 ps <- phy_struct(tree, partition)
 
-a <- chainsaw(partition, ps, interval = 0.9)
-b <- chainsaw(partition, ps, interval = 2)
-z <- chainsaw(partition, ps, interval = 0)
-m <- chainsaw(partition, ps, interval = 1)
+a <- chainsaw(partition, ps, depth = 0.9)
+b <- chainsaw(partition, ps, depth = 2)
+z <- chainsaw(partition, ps, depth = 0)
+m <- chainsaw(partition, ps, depth = 1)
 
 }

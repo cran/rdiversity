@@ -2,8 +2,8 @@ Package: rdiversity
 Type: Package
 Title: Measurement and Partitioning of Similarity-Sensitive
         Biodiversity
-Version: 1.0
-Date: 2017-06-14
+Version: 1.2
+Date: 2018-06-12
 Authors@R: c(person("Sonia", "Mitchell", email = "s.mitchell.2@research.gla.ac.uk",
                   role = c("aut", "cre")),
              person("Richard", "Reeve", email = "richard.reeve@glasgow.ac.uk",
@@ -20,9 +20,9 @@ Imports: methods, ggplot2, ggthemes, ape, phangorn, plyr, tidyr,
         tibble, phytools, reshape2
 Suggests: testthat, knitr, rmarkdown
 RoxygenNote: 6.0.1
-Collate: 'chainsaw.R' 'check_partition.R' 'check_similarity.R'
-        'class-metacommunity.R' 'class-powermean.R'
-        'class-relativeentropy.R' 'metacommunity.R'
+Collate: 'chainsaw.R' 'check_partition.R' 'check_phypartition.R'
+        'check_similarity.R' 'class-metacommunity.R'
+        'class-powermean.R' 'class-relativeentropy.R' 'metacommunity.R'
         'diversity-components.R' 'diversity-measures.R' 'get_title.R'
         'hs_parameters.R' 'inddiv.R' 'metadiv.R' 'phy_abundance.R'
         'phy_struct.R' 'plot_diversity.R' 'power_mean.R' 'powermean.R'
@@ -32,8 +32,8 @@ Collate: 'chainsaw.R' 'check_partition.R' 'check_similarity.R'
         'zmatrix.R'
 Encoding: UTF-8
 NeedsCompilation: no
-Packaged: 2017-06-27 14:55:52 UTC; Soniam
+Packaged: 2018-06-12 13:50:04 UTC; Soniam
 Author: Sonia Mitchell [aut, cre],
   Richard Reeve [aut]
 Repository: CRAN
-Date/Publication: 2017-06-27 15:57:56 UTC
+Date/Publication: 2018-06-12 14:23:05 UTC
