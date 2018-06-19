@@ -1,9 +1,9 @@
-206e22f4f025631de478543b08b8ec7a *DESCRIPTION
+cbbc0d3c0cd15ee8234306546b5b2078 *DESCRIPTION
 8909e76b38596afd8b468221d22e49d9 *NAMESPACE
-ce88bd89db88286cc2868f0190e7d017 *NEWS.md
-482e6cd73767765143dc188260ff4544 *R/chainsaw.R
+c23042218c37c9dce57f4b9f7191cfcf *NEWS.md
+e9b5197ba35c6ce941a10a3c08575e4c *R/chainsaw.R
 1e905c3c1295680bd56ba60ed0c3c448 *R/check_partition.R
-fcd91e02cdd52414fbadc60170d8d80c *R/check_phypartition.R
+56a10dd73c8588c60dcd7b151a9cd93e *R/check_phypartition.R
 dc1a5b937dc91cd73e0a8fe78e767a13 *R/check_similarity.R
 987ffc37deae94f6edb44f621f7ee742 *R/class-metacommunity.R
 29b871241ad126eed10a988e9c746f36 *R/class-powermean.R
@@ -13,9 +13,9 @@ b9659a3e1684edcf11a170b90e133858 *R/class-relativeentropy.R
 3fcec936cc0e7d80e1d301a06bc5142c *R/get_title.R
 72efc94c2476b625004f2a6c45c18a76 *R/hs_parameters.R
 1bf20af95002fb169295b45e0f5c5095 *R/inddiv.R
-352450ac19503f0665bfb53ce5a46fac *R/metacommunity.R
+6cfea74fdc129364b302497ceaedbeff *R/metacommunity.R
 542a3ee8580cb03267ee2c9384f9388d *R/metadiv.R
-ba1722eae420f223a497c271bed8e359 *R/phy_abundance.R
+947b37051f674370a9eefae8ea1df69c *R/phy_abundance.R
 d1af0e91119dd812175cc57a15c171b8 *R/phy_struct.R
 e23372a8faa31fc5299a76b8900c6a8e *R/plot_diversity.R
 a0856dddf9a98c891e97b260d7f78976 *R/power_mean.R
@@ -34,8 +34,8 @@ e15a317fe092cb92b61efa263471e20f *R/subdiv.R
 ec605e3a6b6b7784a3102f6d95039fc5 *R/tbar.R
 3b53c3523fa9876ac8791780bdfd1984 *R/zmatrix.R
 abe476e5bdbb455007f477d40c8e6d38 *README.md
-6aeff2b98873dc8818115f6d613b28c6 *inst/CITATION
-cc4b7ade7e2ea87ba7ee2a0175588853 *man/chainsaw.Rd
+4babda97a0b0ec2c809441054b79616e *inst/CITATION
+c47d95d197da0c8e5eb4f6b795286ea8 *man/chainsaw.Rd
 6cf7eeacb8e0a2d0545cdf249e8ee099 *man/check_partition.Rd
 84d58d0d686cf4b5d0be9065bedbf1f1 *man/check_phypartition.Rd
 848d3bcede87e0253fe18dcce52b82e9 *man/check_similarity.Rd
@@ -55,7 +55,7 @@ b650c26c0a4652a3e4c974206365fe87 *man/norm_meta_alpha.Rd
 7a9f8bf3bf7ba7dd503478fb6f85d5e7 *man/norm_sub_alpha.Rd
 967caaf6f1eed693f70488b1b44a16b3 *man/norm_sub_beta.Rd
 ffd60eb7777c46867b29b174d9d7cce7 *man/norm_sub_rho.Rd
-e7286f2194fcff0171373ba8cf96b7e9 *man/phy_abundance.Rd
+2a6b7377278356e08b6865b5ef6bd71c *man/phy_abundance.Rd
 e06185f85da594390fcabd7b9ad601d3 *man/phy_struct.Rd
 161e223b8db1b943bd5d38e9d3fedb88 *man/plot_diversity.Rd
 8a29dcb6345d538ca6ab57513da99d14 *man/power_mean.Rd
