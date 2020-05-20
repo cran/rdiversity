@@ -7,10 +7,10 @@
 raw_rho(meta)
 }
 \arguments{
-\item{meta}{object of class \code{metacommunity}.}
+\item{meta}{object of class \code{metacommunity}}
 }
 \value{
-Returns an object of class \code{powermean}.
+\code{raw_rho} returns an object of class \code{powermean}
 }
 \description{
 Calculates the low-level diversity component necessary for calculating raw rho
@@ -18,7 +18,8 @@ diversity.
 }
 \details{
 Values generated from \code{raw_rho()} may be input into \code{subdiv()} and
-\code{metadiv()} to calculate raw subcommunity/metacommunity rho diversity.
+\code{metadiv()} to calculate raw subcommunity and metacommunity rho
+diversity.
 }
 \examples{
 pop <- data.frame(a = c(1,3), b = c(1,1))
@@ -27,11 +28,13 @@ pop <- pop/sum(pop)
 meta <- metacommunity(pop)
 
 # Calculate raw rho component
-raw_rho(meta)
+r <- raw_rho(meta)
+subdiv(r, 1)
+metadiv(r, 1)
 
 }
 \references{
-Reeve, R., T. Leinster, C. Cobbold, J. Thompson, N. Brummitt, 
-S. Mitchell, and L. Matthews. 2014. How to partition diversity. 
-arXiv 1404.6520:1–9.
+R. Reeve, T. Leinster, C. Cobbold, J. Thompson, N. Brummitt,
+S. Mitchell, and L. Matthews. 2016. How to partition diversity.
+arXiv 1404.6520v3:1–9.
 }

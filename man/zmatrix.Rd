@@ -7,31 +7,19 @@
 zmatrix(partition, s, ps)
 }
 \arguments{
-\item{partition}{two-dimensinal \code{matrix} of mode \code{numeric} with
-rows as types, columns as subcommunities, and elements containing relative
-abundances of types in subcommunities. In the case of phylogenetic
-metacommunities, these are the relative abundances of terminal taxa.}
+\item{partition}{two-dimensional \code{matrix} of mode \code{numeric}
+with rows as types (species), columns as subcommunities, and each
+element containing the relative abundance of types in each subcommunity
+relative to the metacommunity as a whole. In the phylogenetic case, this
+corresponds to the proportional abundance of terminal taxa}
 
 \item{s}{\code{smatrix()} output; ultrametric-similarity matrix.}
 
 \item{ps}{\code{phy_struct()} output.}
 }
 \value{
-Returns an \eqn{hS x hS} matrix; pair-wise similarity of historic 
-species.
+\code{zmatrix()} returns an \eqn{hS x hS} matrix; pair-wise similarity of historic species.
 }
 \description{
 Function to calculate a phylogenetic similarity matrix.
-}
-\examples{
-tree <- ape::rtree(n = 5)
-tree$tip.label <- paste0("sp", seq_along(tree$tip.label))
-partition <- cbind(a = c(1,1,1,0,0), b = c(0,1,0,1,1))
-row.names(partition) <- tree$tip.label
-partition <- partition / sum(partition)
-ps <- phy_struct(tree, partition)
-s <- smatrix(ps)
-
-zmatrix(partition, s, ps)
-
 }

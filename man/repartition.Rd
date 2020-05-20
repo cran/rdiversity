@@ -9,39 +9,21 @@ repartition(meta, new_partition)
 \arguments{
 \item{meta}{object of class \code{metacommunity}.}
 
-\item{new_partition}{proportional abundance of \emph{types} in the
-subcommunity as a fraction of the metacommunity as a whole (in the
-phylogenetic case, this corresponds to the proportional abundance of
-terminal taxa). If this argument is missing, all species/tips will be
-shuffled.}
+\item{new_partition}{two-dimensional \code{matrix} of mode \code{numeric}
+with rows as types (species), columns as subcommunities, and each
+element containing the relative abundance of types in each subcommunity
+relative to the metacommunity as a whole. In the phylogenetic case, this
+corresponds to the proportional abundance of terminal taxa. If this argument
+is missing, all species / tips will be shuffled}
 }
 \value{
-Returns an object of class \code{metacommunity}.
+\code{repartition()} returns an object of class \code{metacommunity}
 }
 \description{
-Randomly reshuffles the relative abundance of types (\emph{e.g}. species) in 
+Randomly reshuffles the relative abundance of types (\emph{e.g}. species) in
 a metacommunity (whilst maintaining the relationship between the relative
 abundance of a particular species across subcommunities). In the case of a
 phylogenetic metacommunity, the relative abundance of terminal taxa are
 randomly reshuffled and the relative abundance of types (historical species)
 are calculated from the resulting partition.
-}
-\examples{
-tree <- ape::rtree(n = 5)
-tree$tip.label <- paste0("sp", seq_along(tree$tip.label))
-partition <- cbind(a = sample(5,5), b = sample(5,5))
-row.names(partition) <- tree$tip.label
-partition <- partition / sum(partition)
-meta <- metacommunity(partition, tree)
-meta@raw_abundance
-
-a <- repartition(meta)
-a@raw_abundance
-
-# Non-phylogenetic example
-meta <- metacommunity(partition)
-meta@type_abundance
-a <- repartition(meta)
-a@type_abundance
-
 }

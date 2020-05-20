@@ -7,10 +7,10 @@
 norm_beta(meta)
 }
 \arguments{
-\item{meta}{object of class \code{metacommunity}.}
+\item{meta}{object of class \code{metacommunity}}
 }
 \value{
-Returns an object of class \code{relativeentropy}.
+\code{norm_beta} returns an object of class \code{relativeentropy}
 }
 \description{
 Calculates the low-level diversity component necessary for calculating
@@ -18,7 +18,7 @@ normalised beta diversity.
 }
 \details{
 Values generated from \code{norm_beta()} may be input into \code{subdiv()} and
-\code{metadiv()} to calculate normalised subcommunity/metacommunity beta
+\code{metadiv()} to calculate normalised subcommunity and metacommunity beta
 diversity.
 }
 \examples{
@@ -28,11 +28,13 @@ pop <- pop/sum(pop)
 meta <- metacommunity(pop)
 
 # Calculate normalised beta component
-norm_beta(meta)
+b <- norm_beta(meta)
+subdiv(b, 1)
+metadiv(b, 1)
 
 }
 \references{
-Reeve, R., T. Leinster, C. Cobbold, J. Thompson, N. Brummitt, 
-S. Mitchell, and L. Matthews. 2014. How to partition diversity. 
-arXiv 1404.6520:1–9.
+R. Reeve, T. Leinster, C. Cobbold, J. Thompson, N. Brummitt,
+S. Mitchell, and L. Matthews. 2016. How to partition diversity.
+arXiv 1404.6520v3:1–9.
 }

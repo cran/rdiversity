@@ -9,30 +9,25 @@ phy_struct(tree, partition)
 \arguments{
 \item{tree}{object of class \code{phylo}}
 
-\item{partition}{two-dimensinal \code{matrix} of mode \code{numeric} with
-rows as types, columns as subcommunities, and elements containing relative
-abundances of types in subcommunities. In the case of phylogenetic
-metacommunities, these are the relative abundances of terminal taxa.}
+\item{partition}{two-dimensional \code{matrix} of mode \code{numeric}
+with rows as types (species), columns as subcommunities, and each
+element containing the relative abundance of types in each subcommunity
+relative to the metacommunity as a whole. In the phylogenetic case, this
+corresponds to the proportional abundance of historical species, which is
+calculated from the proportional abundance of terminal taxa}
 }
 \value{
-Returns a \code{list} containing:
+\code{phy_struct()} returns a \code{list} containing:
 \tabular{ll}{
-\code{$structure} \tab - each row denotes historical species, columns denote
-terminal taxa, and elements contain 'branch lengths / tbar' \cr
-\code{$parameters} \tab - information associated with each historical species \cr
+\code{$structure} \tab - each row denotes historical species, columns
+denote terminal taxa, and elements contain 'branch lengths' \cr
+\code{$tbar} - the average distance from root to tip for all terminal
+taxa \cr
+\code{$parameters} \tab - information associated with each historical
+species \cr
 \code{$tree} \tab - object of class \code{phylo} \cr
 }
 }
 \description{
 Converts an object into class \code{phylo} into class \code{phy_struct}.
-}
-\examples{
-tree <- ape::rtree(n = 5)
-tree$tip.label <- paste0("sp", seq_along(tree$tip.label))
-partition <- cbind(a = c(1,1,1,0,0), b = c(0,1,0,1,1))
-row.names(partition) <- tree$tip.label
-partition <- partition / sum(partition)
-
-res <- phy_struct(tree, partition)
-
 }

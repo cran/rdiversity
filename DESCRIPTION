@@ -2,13 +2,14 @@ Package: rdiversity
 Type: Package
 Title: Measurement and Partitioning of Similarity-Sensitive
         Biodiversity
-Version: 1.2.1
-Date: 2018-06-12
-Authors@R: c(person("Sonia", "Mitchell", email = "s.mitchell.2@research.gla.ac.uk",
-                  role = c("aut", "cre"), comment = c(ORCID = "0000-0003-1536-2066")),
+Version: 2.0
+Date: 2020-05-05
+Authors@R: c(person("Sonia", "Mitchell", email = "sonia.mitchell@glasgow.ac.uk",
+                  role = c("cre", "aut"), comment = c(ORCID = "0000-0003-1536-2066")),
              person("Richard", "Reeve", email = "richard.reeve@glasgow.ac.uk",
-                  role = "aut", comment = c(ORCID = "0000-0003-2589-8091")))
-Maintainer: Sonia Mitchell <s.mitchell.2@research.gla.ac.uk>
+                  role = c("aut", "ths"), comment = c(ORCID = "0000-0003-2589-8091")),
+             person("Tom", "White", email = "whitetomjames@gmail.com",
+                  role = "ctb", comment = c(ORCID = "0000-0002-9639-3800")))
 URL: https://github.com/boydorr/rdiversity
 BugReports: https://github.com/boydorr/rdiversity/issues
 Description: Provides a framework for the measurement and partitioning of
@@ -16,24 +17,29 @@ Description: Provides a framework for the measurement and partitioning of
     constituent subcommunities. Richard Reeve, et al. (2016) 
     <arXiv:1404.6520v3>.
 License: GPL-3
-Imports: methods, ggplot2, ggthemes, ape, phangorn, plyr, tidyr,
-        tibble, phytools, reshape2
-Suggests: testthat, knitr, rmarkdown
-RoxygenNote: 6.0.1
+Depends: R (>= 2.10)
+Imports: binaryLogic, methods, reshape2, stats, utils
+Suggests: ape, testthat, knitr, rmarkdown, covr, vcfR
+LazyData: true
+RoxygenNote: 7.1.0
 Collate: 'chainsaw.R' 'check_partition.R' 'check_phypartition.R'
-        'check_similarity.R' 'class-metacommunity.R'
-        'class-powermean.R' 'class-relativeentropy.R' 'metacommunity.R'
-        'diversity-components.R' 'diversity-measures.R' 'get_title.R'
-        'hs_parameters.R' 'inddiv.R' 'metadiv.R' 'phy_abundance.R'
-        'phy_struct.R' 'plot_diversity.R' 'power_mean.R' 'powermean.R'
-        'qD.R' 'subdiv.R' 'qDZ.R' 'qDZ_single.R' 'qD_single.R'
-        'rdiversity-package.R' 'relativeentropy.R' 'repartition.R'
-        'similarity_shimatani.R' 'smatrix.R' 'summarise.R' 'tbar.R'
-        'zmatrix.R'
+        'check_similarity.R' 'class-distance.R' 'class-metacommunity.R'
+        'class-powermean.R' 'class-relativeentropy.R'
+        'class-similarity.R' 'similarity.R' 'dist2sim.R' 'distance.R'
+        'metadiv.R' 'subdiv.R' 'metacommunity.R'
+        'diversity-components.R' 'diversity-measures.R' 'gen2dist.r'
+        'geneid.R' 'genevec.R' 'hs_parameters.R' 'inddiv.R'
+        'phy2branch.R' 'phy2dist.R' 'phy_abundance.R' 'phy_struct.R'
+        'power_mean.R' 'powermean.R' 'rdiversity-package.R'
+        'relativeentropy.R' 'repartition.R' 'smatrix.R' 'summarise.R'
+        'tax2dist.R' 'taxfac.R' 'taxid.R' 'taxmask.R' 'taxvec.R'
+        'tbar.R' 'zmatrix.R'
 Encoding: UTF-8
 NeedsCompilation: no
-Packaged: 2018-06-19 14:26:01 UTC; Soniam
-Author: Sonia Mitchell [aut, cre] (<https://orcid.org/0000-0003-1536-2066>),
-  Richard Reeve [aut] (<https://orcid.org/0000-0003-2589-8091>)
+Packaged: 2020-05-14 23:02:23 UTC; Soniam
+Author: Sonia Mitchell [cre, aut] (<https://orcid.org/0000-0003-1536-2066>),
+  Richard Reeve [aut, ths] (<https://orcid.org/0000-0003-2589-8091>),
+  Tom White [ctb] (<https://orcid.org/0000-0002-9639-3800>)
+Maintainer: Sonia Mitchell <sonia.mitchell@glasgow.ac.uk>
 Repository: CRAN
-Date/Publication: 2018-06-19 14:53:02 UTC
+Date/Publication: 2020-05-20 13:10:05 UTC

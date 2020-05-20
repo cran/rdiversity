@@ -9,22 +9,15 @@ raw_meta_rho(meta, qs)
 \arguments{
 \item{meta}{object of class \code{metacommunity}}
 
-\item{qs}{\code{vector} of \emph{q} values}
+\item{qs}{\code{vector} of mode \code{numeric} containing \emph{q} values}
 }
 \value{
-Returns a standard output of class \code{tibble}, with columns:
-\code{measure}, (raw rho),
-\code{q} (parameter of conservatism), 
-\code{type_level} (), 
-\code{type_name} (label attributed to type), 
-\code{partition_level} (level of diversity, \emph{i.e.} metacommunity), 
-\code{partition_name} (label attributed to partition), and 
-\code{diversity}.
+\code{raw_meta_rho} returns a standard output of class \code{rdiv}
 }
 \description{
-Calculates similarity-sensitive raw metacommunity rho diversity (the 
+Calculates similarity-sensitive raw metacommunity rho diversity (the
 average redundancy of subcommunities. This measure may be calculated
-for a series of orders, repesented as a vector of \code{qs}.
+for a series of orders, represented as a vector of \code{qs}.
 }
 \examples{
 pop <- data.frame(a = c(1,3), b = c(1,1))
@@ -37,7 +30,7 @@ raw_meta_rho(meta, 0:2)
 
 }
 \references{
-Reeve, R., T. Leinster, C. Cobbold, J. Thompson, N. Brummitt, 
-S. Mitchell, and L. Matthews. 2014. How to partition diversity. 
-arXiv 1404.6520:1–9.
+R. Reeve, T. Leinster, C. Cobbold, J. Thompson, N. Brummitt,
+S. Mitchell, and L. Matthews. 2016. How to partition diversity.
+arXiv 1404.6520v3:1–9.
 }

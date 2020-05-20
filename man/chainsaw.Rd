@@ -2,41 +2,30 @@
 % Please edit documentation in R/chainsaw.R
 \name{chainsaw}
 \alias{chainsaw}
-\title{Function to cut phylogeny from present day species to a specified depth.}
+\title{Function to cut the phylogeny to a specified depth from the tip with the
+greatest distance from the root.}
 \usage{
 chainsaw(partition, ps, depth)
 }
 \arguments{
-\item{partition}{proportional abundance of types in the subcommunity as a 
-fraction of the metacommunity as a whole (in the phylogenetic case, this 
-corresponds to the proportional abundance of present day species)}
+\item{partition}{two-dimensional \code{matrix} of mode \code{numeric}
+with rows as types (species), columns as subcommunities, and each
+element containing the relative abundance of types in each subcommunity
+relative to the metacommunity as a whole. In the phylogenetic case, this
+corresponds to the proportional abundance of historical species, which is
+calculated from the proportional abundance of terminal taxa}
 
 \item{ps}{\code{phy_struct()} output}
 
 \item{depth}{proportion of total tree height to be conserved (taken as
-a proportion from the heighest tip). Describes how far back we go in the tree,
+a proportion from the highest tip). Describes how far back we go in the tree,
 with 0 marking the date of the most recent tip, and 1 marking the most
 recent common ancestor. Numbers greater than 1 extend the root of the tree}
 }
 \value{
-Returns an object of class \code{phy_struct} containing a new structural
-matrix ('@structure') and the original phylogenetic parameters
-('@parameters').
+\code{chainsaw()} returns an object of class \code{metacommunity}
 }
 \description{
-Function to cut phylogeny from present day species to a specified depth.
-}
-\examples{
-tree <- ape::rtree(n = 5)
-tree$tip.label <- paste0("sp", seq_along(tree$tip.label))
-partition <- cbind(a = c(1,1,1,0,0), b = c(0,1,0,1,1))
-row.names(partition) <- tree$tip.label
-partition <- partition / sum(partition)
-ps <- phy_struct(tree, partition)
-
-a <- chainsaw(partition, ps, depth = 0.9)
-b <- chainsaw(partition, ps, depth = 2)
-z <- chainsaw(partition, ps, depth = 0)
-m <- chainsaw(partition, ps, depth = 1)
-
+Function to cut the phylogeny to a specified depth from the tip with the
+greatest distance from the root.
 }

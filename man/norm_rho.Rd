@@ -7,10 +7,10 @@
 norm_rho(meta)
 }
 \arguments{
-\item{meta}{object of class \code{metacommunity}.}
+\item{meta}{object of class \code{metacommunity}}
 }
 \value{
-Returns an object of class \code{powermean}.
+\code{norm_rho} returns an object of class \code{powermean}
 }
 \description{
 Calculates the low-level diversity component necessary for calculating
@@ -18,7 +18,7 @@ normalised rho diversity.
 }
 \details{
 Values generated from \code{norm_rho()} may be input into \code{subdiv()} and
-\code{metadiv()} to calculate normalised subcommunity/metacommunity rho
+\code{metadiv()} to calculate normalised subcommunity and metacommunity rho
 diversity.
 }
 \examples{
@@ -28,11 +28,13 @@ pop <- pop/sum(pop)
 meta <- metacommunity(pop)
 
 # Calculate normalised rho component
-norm_rho(meta)
+r <- norm_rho(meta)
+subdiv(r, 1)
+metadiv(r, 1)
 
 }
 \references{
-Reeve, R., T. Leinster, C. Cobbold, J. Thompson, N. Brummitt, 
-S. Mitchell, and L. Matthews. 2014. How to partition diversity. 
-arXiv 1404.6520:1–9.
+R. Reeve, T. Leinster, C. Cobbold, J. Thompson, N. Brummitt,
+S. Mitchell, and L. Matthews. 2016. How to partition diversity.
+arXiv 1404.6520v3:1–9.
 }

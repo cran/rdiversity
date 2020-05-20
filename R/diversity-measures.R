@@ -1,25 +1,19 @@
 #' Raw subcommunity alpha diversity
 #'
-#' Calculates similarity sensitive raw subcommunity alpha diversity (an 
+#' Calculates similarity sensitive raw subcommunity alpha diversity (an
 #' estimate of naive-community metacommunity diversity). This measure may be
-#' calculated for a series of orders, repesented as a vector of \code{qs}.
+#' calculated for a series of orders, represented as a vector of \code{qs}.
 #'
 #' @param meta object of class \code{metacommunity}
-#' @param qs \code{vector} of \emph{q} values
+#' @param qs \code{vector} of mode \code{numeric} containing \emph{q} values
 #'
-#' @return Returns a standard output of class \code{tibble}, with columns:
-#' \code{measure}, (raw alpha),
-#' \code{q} (parameter of conservatism), 
-#' \code{type_level} (), 
-#' \code{type_name} (label attributed to type), 
-#' \code{partition_level} (level of diversity, \emph{i.e.} subcommunity), 
-#' \code{partition_name} (label attributed to partition), and 
-#' \code{diversity}.
-#' 
-#' @references Reeve, R., T. Leinster, C. Cobbold, J. Thompson, N. Brummitt, 
-#' S. Mitchell, and L. Matthews. 2016. How to partition diversity. 
-#' arXiv 1404.6520v3:1–9.
+#' @return \code{raw_sub_alpha} returns a standard output of class \code{rdiv}
 #' @export
+#'
+#' @references R. Reeve, T. Leinster, C. Cobbold, J. Thompson, N. Brummitt,
+#' S. Mitchell, and L. Matthews. 2016. How to partition diversity.
+#' arXiv 1404.6520v3:1–9.
+#'
 #' @examples
 #' pop <- data.frame(a = c(1,3), b = c(1,1))
 #' row.names(pop) <- paste0("sp", 1:2)
@@ -35,25 +29,19 @@ raw_sub_alpha <- function(meta, qs)
 
 #' Normalised subcommunity alpha diversity
 #'
-#' Calculates similarity-sensitive normalised subcommunity alpha diversity 
-#' (the diversity of subcommunity \emph{j} in isolation. This measure may be 
-#' calculated for a series of orders, repesented as a vector of \code{qs}.
+#' Calculates similarity-sensitive normalised subcommunity alpha diversity
+#' (the diversity of subcommunity \emph{j} in isolation. This measure may be
+#' calculated for a series of orders, represented as a vector of \code{qs}.
 #'
 #' @inheritParams raw_sub_alpha
 #'
-#' @return Returns a standard output of class \code{tibble}, with columns:
-#' \code{measure}, (norm alpha),
-#' \code{q} (parameter of conservatism), 
-#' \code{type_level} (), 
-#' \code{type_name} (label attributed to type), 
-#' \code{partition_level} (level of diversity, \emph{i.e.} subcommunity), 
-#' \code{partition_name} (label attributed to partition), and 
-#' \code{diversity}.
-#' 
-#' @references Reeve, R., T. Leinster, C. Cobbold, J. Thompson, N. Brummitt, 
-#' S. Mitchell, and L. Matthews. 2014. How to partition diversity. 
-#' arXiv 1404.6520:1–9.
+#' @return \code{norm_sub_alpha} returns a standard output of class \code{rdiv}
 #' @export
+#'
+#' @references R. Reeve, T. Leinster, C. Cobbold, J. Thompson, N. Brummitt,
+#' S. Mitchell, and L. Matthews. 2016. How to partition diversity.
+#' arXiv 1404.6520v3:1–9.
+#'
 #' @examples
 #' pop <- data.frame(a = c(1,3), b = c(1,1))
 #' row.names(pop) <- paste0("sp", 1:2)
@@ -69,25 +57,19 @@ norm_sub_alpha <- function(meta, qs)
 
 #' Raw subcommunity beta diversity
 #'
-#' Calculates similarity-sensitive raw subcommunity beta diversity (the 
-#' distinctiveness of subcommunity \emph{j}). This measure may be calculated 
-#' for a series of orders, repesented as a vector of \code{qs}.
+#' Calculates similarity-sensitive raw subcommunity beta diversity (the
+#' distinctiveness of subcommunity \emph{j}). This measure may be calculated
+#' for a series of orders, represented as a vector of \code{qs}.
 #'
 #' @inheritParams raw_sub_alpha
 #'
-#' @return Returns a standard output of class \code{tibble}, with columns:
-#' \code{measure}, (raw beta),
-#' \code{q} (parameter of conservatism), 
-#' \code{type_level} (), 
-#' \code{type_name} (label attributed to type), 
-#' \code{partition_level} (level of diversity, \emph{i.e.} subcommunity), 
-#' \code{partition_name} (label attributed to partition), and 
-#' \code{diversity}.
-#' 
-#' @references Reeve, R., T. Leinster, C. Cobbold, J. Thompson, N. Brummitt, 
-#' S. Mitchell, and L. Matthews. 2014. How to partition diversity. 
-#' arXiv 1404.6520:1–9.
+#' @return \code{raw_sub_beta} returns a standard output of class \code{rdiv}
 #' @export
+#'
+#' @references R. Reeve, T. Leinster, C. Cobbold, J. Thompson, N. Brummitt,
+#' S. Mitchell, and L. Matthews. 2016. How to partition diversity.
+#' arXiv 1404.6520v3:1–9.
+#'
 #' @examples
 #' pop <- data.frame(a = c(1,3), b = c(1,1))
 #' row.names(pop) <- paste0("sp", 1:2)
@@ -103,26 +85,20 @@ raw_sub_beta <- function(meta, qs)
 
 #' Normalised subcommunity beta diversity
 #'
-#' Calculates similarity-sensitive normalised subcommunity beta diversity (an 
-#' estimate of the effective number of distinct subcommunities). This 
-#' measure may be calculated for a series of orders, repesented as a vector
+#' Calculates similarity-sensitive normalised subcommunity beta diversity (an
+#' estimate of the effective number of distinct subcommunities). This
+#' measure may be calculated for a series of orders, represented as a vector
 #' of \code{qs}.
 #'
 #' @inheritParams raw_sub_alpha
 #'
-#' @return Returns a standard output of class \code{tibble}, with columns:
-#' \code{measure}, (norm beta),
-#' \code{q} (parameter of conservatism), 
-#' \code{type_level} (), 
-#' \code{type_name} (label attributed to type), 
-#' \code{partition_level} (level of diversity, \emph{i.e.} subcommunity), 
-#' \code{partition_name} (label attributed to partition), and 
-#' \code{diversity}.
-#' 
-#' @references Reeve, R., T. Leinster, C. Cobbold, J. Thompson, N. Brummitt, 
-#' S. Mitchell, and L. Matthews. 2014. How to partition diversity. 
-#' arXiv 1404.6520:1–9.
+#' @return \code{norm_sub_beta} returns a standard output of class \code{rdiv}
 #' @export
+#'
+#' @references R. Reeve, T. Leinster, C. Cobbold, J. Thompson, N. Brummitt,
+#' S. Mitchell, and L. Matthews. 2016. How to partition diversity.
+#' arXiv 1404.6520v3:1–9.
+#'
 #' @examples
 #' pop <- data.frame(a = c(1,3), b = c(1,1))
 #' row.names(pop) <- paste0("sp", 1:2)
@@ -138,25 +114,19 @@ norm_sub_beta <- function(meta, qs)
 
 #' Raw subcommunity rho diversity
 #'
-#' Calculates similarity-sensitive raw subcommunity rho diversity (the 
+#' Calculates similarity-sensitive raw subcommunity rho diversity (the
 #' redundancy of subcommunity \emph{j}. This measure may be calculated for
-#' a series of orders, repesented as a vector of \code{qs}.
+#' a series of orders, represented as a vector of \code{qs}.
 #'
 #' @inheritParams raw_sub_alpha
 #'
-#' @return Returns a standard output of class \code{tibble}, with columns:
-#' \code{measure}, (raw rho),
-#' \code{q} (parameter of conservatism), 
-#' \code{type_level} (), 
-#' \code{type_name} (label attributed to type), 
-#' \code{partition_level} (level of diversity, \emph{i.e.} subcommunity), 
-#' \code{partition_name} (label attributed to partition), and 
-#' \code{diversity}.
-#' 
-#' @references Reeve, R., T. Leinster, C. Cobbold, J. Thompson, N. Brummitt, 
-#' S. Mitchell, and L. Matthews. 2014. How to partition diversity. 
-#' arXiv 1404.6520:1–9.
+#' @return \code{raw_sub_rho} returns a standard output of class \code{rdiv}
 #' @export
+#'
+#' @references R. Reeve, T. Leinster, C. Cobbold, J. Thompson, N. Brummitt,
+#' S. Mitchell, and L. Matthews. 2016. How to partition diversity.
+#' arXiv 1404.6520v3:1–9.
+#'
 #' @examples
 #' pop <- data.frame(a = c(1,3), b = c(1,1))
 #' row.names(pop) <- paste0("sp", 1:2)
@@ -172,25 +142,19 @@ raw_sub_rho <- function(meta, qs)
 
 #' Normalised subcommunity rho diversity
 #'
-#' Calculates similarity-sensitive normalised subcommunity rho diversity (the 
+#' Calculates similarity-sensitive normalised subcommunity rho diversity (the
 #' representativeness of subcommunity \emph{j}). This measure may be calculated
-#' for a series of orders, repesented as a vector of \code{qs}.
+#' for a series of orders, represented as a vector of \code{qs}.
 #'
 #' @inheritParams raw_sub_alpha
 #'
-#' @return Returns a standard output of class \code{tibble}, with columns:
-#' \code{measure}, (norm rho),
-#' \code{q} (parameter of conservatism), 
-#' \code{type_level} (), 
-#' \code{type_name} (label attributed to type), 
-#' \code{partition_level} (level of diversity, \emph{i.e.} subcommunity), 
-#' \code{partition_name} (label attributed to partition), and 
-#' \code{diversity}.
-#' 
-#' @references Reeve, R., T. Leinster, C. Cobbold, J. Thompson, N. Brummitt, 
-#' S. Mitchell, and L. Matthews. 2014. How to partition diversity. 
-#' arXiv 1404.6520:1–9.
+#' @return \code{norm_sub_rho} returns a standard output of class \code{rdiv}
 #' @export
+#'
+#' @references R. Reeve, T. Leinster, C. Cobbold, J. Thompson, N. Brummitt,
+#' S. Mitchell, and L. Matthews. 2016. How to partition diversity.
+#' arXiv 1404.6520v3:1–9.
+#'
 #' @examples
 #' pop <- data.frame(a = c(1,3), b = c(1,1))
 #' row.names(pop) <- paste0("sp", 1:2)
@@ -206,26 +170,20 @@ norm_sub_rho <- function(meta, qs)
 
 #' Subcommunity gamma diversity
 #'
-#' Calculates similarity-sensitive subcommunity gamma diversity (the 
-#' contribution per individual toward metacommunity diversity). This 
-#' measure may be calculated for a series of orders, repesented as a vector
+#' Calculates similarity-sensitive subcommunity gamma diversity (the
+#' contribution per individual toward metacommunity diversity). This
+#' measure may be calculated for a series of orders, represented as a vector
 #' of \code{qs}.
 #'
 #' @inheritParams raw_sub_alpha
 #'
-#' @return Returns a standard output of class \code{tibble}, with columns:
-#' \code{measure}, (raw gamma),
-#' \code{q} (parameter of conservatism), 
-#' \code{type_level} (), 
-#' \code{type_name} (label attributed to type), 
-#' \code{partition_level} (level of diversity, \emph{i.e.} subcommunity), 
-#' \code{partition_name} (label attributed to partition), and 
-#' \code{diversity}.
-#' 
-#' @references Reeve, R., T. Leinster, C. Cobbold, J. Thompson, N. Brummitt, 
-#' S. Mitchell, and L. Matthews. 2014. How to partition diversity. 
-#' arXiv 1404.6520:1–9.
+#' @return \code{sub_gamma} returns a standard output of class \code{rdiv}
 #' @export
+#'
+#' @references R. Reeve, T. Leinster, C. Cobbold, J. Thompson, N. Brummitt,
+#' S. Mitchell, and L. Matthews. 2016. How to partition diversity.
+#' arXiv 1404.6520v3:1–9.
+#'
 #' @examples
 #' pop <- data.frame(a = c(1,3), b = c(1,1))
 #' row.names(pop) <- paste0("sp", 1:2)
@@ -241,25 +199,19 @@ sub_gamma <- function(meta, qs)
 
 #' Raw metacommunity alpha diversity
 #'
-#' Calculates similarity-sensitive raw metacommunity alpha diversity (the 
+#' Calculates similarity-sensitive raw metacommunity alpha diversity (the
 #' naive-community metacommunity diversity). This measure may be calculated
-#' for a series of orders, repesented as a vector of \code{qs}.
+#' for a series of orders, represented as a vector of \code{qs}.
 #'
 #' @inheritParams raw_sub_alpha
 #'
-#' @return Returns a standard output of class \code{tibble}, with columns:
-#' \code{measure}, (raw alpha),
-#' \code{q} (parameter of conservatism), 
-#' \code{type_level} (), 
-#' \code{type_name} (label attributed to type), 
-#' \code{partition_level} (level of diversity, \emph{i.e.} metacommunity), 
-#' \code{partition_name} (label attributed to partition), and 
-#' \code{diversity}.
-#' 
-#' @references Reeve, R., T. Leinster, C. Cobbold, J. Thompson, N. Brummitt, 
-#' S. Mitchell, and L. Matthews. 2014. How to partition diversity. 
-#' arXiv 1404.6520:1–9.
+#' @return \code{raw_meta_alpha} returns a standard output of class \code{rdiv}
 #' @export
+#'
+#' @references R. Reeve, T. Leinster, C. Cobbold, J. Thompson, N. Brummitt,
+#' S. Mitchell, and L. Matthews. 2016. How to partition diversity.
+#' arXiv 1404.6520v3:1–9.
+#'
 #' @examples
 #' pop <- data.frame(a = c(1,3), b = c(1,1))
 #' row.names(pop) <- paste0("sp", 1:2)
@@ -275,26 +227,20 @@ raw_meta_alpha <- function(meta, qs)
 
 #' Normalised metacommunity alpha diversity
 #'
-#' Calculates similarity-sensitive normalised metacommunity alpha diversity 
-#' (the average similarity-sensitive diversity of subcommunities). This 
-#' measure may be calculated for a series of orders, repesented as a vector
+#' Calculates similarity-sensitive normalised metacommunity alpha diversity
+#' (the average similarity-sensitive diversity of subcommunities). This
+#' measure may be calculated for a series of orders, represented as a vector
 #' of \code{qs}.
 #'
 #' @inheritParams raw_sub_alpha
 #'
-#' @return Returns a standard output of class \code{tibble}, with columns:
-#' \code{measure}, (norm alpha),
-#' \code{q} (parameter of conservatism), 
-#' \code{type_level} (), 
-#' \code{type_name} (label attributed to type), 
-#' \code{partition_level} (level of diversity, \emph{i.e.} metacommunity), 
-#' \code{partition_name} (label attributed to partition), and 
-#' \code{diversity}.
-#' 
-#' @references Reeve, R., T. Leinster, C. Cobbold, J. Thompson, N. Brummitt, 
-#' S. Mitchell, and L. Matthews. 2014. How to partition diversity. 
-#' arXiv 1404.6520:1–9.
+#' @return \code{norm_meta_alpha} returns a standard output of class \code{rdiv}
 #' @export
+#'
+#' @references R. Reeve, T. Leinster, C. Cobbold, J. Thompson, N. Brummitt,
+#' S. Mitchell, and L. Matthews. 2016. How to partition diversity.
+#' arXiv 1404.6520v3:1–9.
+#'
 #' @examples
 #' pop <- data.frame(a = c(1,3), b = c(1,1))
 #' row.names(pop) <- paste0("sp", 1:2)
@@ -310,25 +256,19 @@ norm_meta_alpha <- function(meta, qs)
 
 #' Raw metacommunity beta diversity
 #'
-#' Calculates similarity-sensitive raw metacommunity beta diversity (the 
+#' Calculates similarity-sensitive raw metacommunity beta diversity (the
 #' average distinctiveness of subcommunities). This  measure may be
-#' calculated for a series of orders, repesented as a vector of \code{qs}.
+#' calculated for a series of orders, represented as a vector of \code{qs}.
 #'
 #' @inheritParams raw_sub_alpha
 #'
-#' @return Returns a standard output of class \code{tibble}, with columns:
-#' \code{measure}, (raw beta),
-#' \code{q} (parameter of conservatism), 
-#' \code{type_level} (), 
-#' \code{type_name} (label attributed to type), 
-#' \code{partition_level} (level of diversity, \emph{i.e.} metacommunity), 
-#' \code{partition_name} (label attributed to partition), and 
-#' \code{diversity}.
-#' 
-#' @references Reeve, R., T. Leinster, C. Cobbold, J. Thompson, N. Brummitt, 
-#' S. Mitchell, and L. Matthews. 2014. How to partition diversity. 
-#' arXiv 1404.6520:1–9.
+#' @return \code{raw_meta_beta} returns a standard output of class \code{rdiv}
 #' @export
+#'
+#' @references R. Reeve, T. Leinster, C. Cobbold, J. Thompson, N. Brummitt,
+#' S. Mitchell, and L. Matthews. 2016. How to partition diversity.
+#' arXiv 1404.6520v3:1–9.
+#'
 #' @examples
 #' pop <- data.frame(a = c(1,3), b = c(1,1))
 #' row.names(pop) <- paste0("sp", 1:2)
@@ -344,25 +284,19 @@ raw_meta_beta <- function(meta, qs)
 
 #' Normalised metacommunity beta diversity
 #'
-#' Calculates similarity-sensitive normalised metacommunity beta diversity 
-#' (the effective number of distinct subcommunities. This measure may be 
-#' calculated for a series of orders, repesented as a vector of \code{qs}.
+#' Calculates similarity-sensitive normalised metacommunity beta diversity
+#' (the effective number of distinct subcommunities. This measure may be
+#' calculated for a series of orders, represented as a vector of \code{qs}.
 #'
 #' @inheritParams raw_sub_alpha
 #'
-#' @return Returns a standard output of class \code{tibble}, with columns:
-#' \code{measure}, (norm beta),
-#' \code{q} (parameter of conservatism), 
-#' \code{type_level} (), 
-#' \code{type_name} (label attributed to type), 
-#' \code{partition_level} (level of diversity, \emph{i.e.} metacommunity), 
-#' \code{partition_name} (label attributed to partition), and 
-#' \code{diversity}.
-#' 
-#' @references Reeve, R., T. Leinster, C. Cobbold, J. Thompson, N. Brummitt, 
-#' S. Mitchell, and L. Matthews. 2014. How to partition diversity. 
-#' arXiv 1404.6520:1–9.
+#' @return \code{norm_meta_beta} returns a standard output of class \code{rdiv}
 #' @export
+#'
+#' @references R. Reeve, T. Leinster, C. Cobbold, J. Thompson, N. Brummitt,
+#' S. Mitchell, and L. Matthews. 2016. How to partition diversity.
+#' arXiv 1404.6520v3:1–9.
+#'
 #' @examples
 #' pop <- data.frame(a = c(1,3), b = c(1,1))
 #' row.names(pop) <- paste0("sp", 1:2)
@@ -378,25 +312,19 @@ norm_meta_beta <- function(meta, qs)
 
 #' Raw metacommunity rho diversity
 #'
-#' Calculates similarity-sensitive raw metacommunity rho diversity (the 
+#' Calculates similarity-sensitive raw metacommunity rho diversity (the
 #' average redundancy of subcommunities. This measure may be calculated
-#' for a series of orders, repesented as a vector of \code{qs}.
+#' for a series of orders, represented as a vector of \code{qs}.
 #'
 #' @inheritParams raw_sub_alpha
 #'
-#' @return Returns a standard output of class \code{tibble}, with columns:
-#' \code{measure}, (raw rho),
-#' \code{q} (parameter of conservatism), 
-#' \code{type_level} (), 
-#' \code{type_name} (label attributed to type), 
-#' \code{partition_level} (level of diversity, \emph{i.e.} metacommunity), 
-#' \code{partition_name} (label attributed to partition), and 
-#' \code{diversity}.
-#' 
-#' @references Reeve, R., T. Leinster, C. Cobbold, J. Thompson, N. Brummitt, 
-#' S. Mitchell, and L. Matthews. 2014. How to partition diversity. 
-#' arXiv 1404.6520:1–9.
+#' @return \code{raw_meta_rho} returns a standard output of class \code{rdiv}
 #' @export
+#'
+#' @references R. Reeve, T. Leinster, C. Cobbold, J. Thompson, N. Brummitt,
+#' S. Mitchell, and L. Matthews. 2016. How to partition diversity.
+#' arXiv 1404.6520v3:1–9.
+#'
 #' @examples
 #' pop <- data.frame(a = c(1,3), b = c(1,1))
 #' row.names(pop) <- paste0("sp", 1:2)
@@ -412,25 +340,19 @@ raw_meta_rho <- function(meta, qs)
 
 #' Normalised metacommunity rho diversity
 #'
-#' Calculates similarity-sensitive normalised metacommunity rho diversity (the 
+#' Calculates similarity-sensitive normalised metacommunity rho diversity (the
 #' average representativeness of subcommunities. This measure may be
-#' calculated for a series of orders, repesented as a vector of \code{qs}.
+#' calculated for a series of orders, represented as a vector of \code{qs}.
 #'
 #' @inheritParams raw_sub_alpha
 #'
-#' @return Returns a standard output of class \code{tibble}, with columns:
-#' \code{measure}, (norm rho),
-#' \code{q} (parameter of conservatism), 
-#' \code{type_level} (), 
-#' \code{type_name} (label attributed to type), 
-#' \code{partition_level} (level of diversity, \emph{i.e.} metacommunity), 
-#' \code{partition_name} (label attributed to partition), and 
-#' \code{diversity}.
-#' 
-#' @references Reeve, R., T. Leinster, C. Cobbold, J. Thompson, N. Brummitt, 
-#' S. Mitchell, and L. Matthews. 2014. How to partition diversity. 
-#' arXiv 1404.6520:1–9.
+#' @return \code{norm_meta_rho} returns a standard output of class \code{rdiv}
 #' @export
+#'
+#' @references R. Reeve, T. Leinster, C. Cobbold, J. Thompson, N. Brummitt,
+#' S. Mitchell, and L. Matthews. 2016. How to partition diversity.
+#' arXiv 1404.6520v3:1–9.
+#'
 #' @examples
 #' pop <- data.frame(a = c(1,3), b = c(1,1))
 #' row.names(pop) <- paste0("sp", 1:2)
@@ -446,25 +368,19 @@ norm_meta_rho <- function(meta, qs)
 
 #' Metacommunity gamma diversity
 #'
-#' Calculates similarity-sensitive metacommunity gamma diversity (the 
+#' Calculates similarity-sensitive metacommunity gamma diversity (the
 #' metacommunity similarity-sensitive diversity). This measure may be
-#' calculated for a series of orders, repesented as a vector of \code{qs}.
+#' calculated for a series of orders, represented as a vector of \code{qs}.
 #'
 #' @inheritParams raw_sub_alpha
 #'
-#' @return Returns a standard output of class \code{tibble}, with columns:
-#' \code{measure}, (raw gamma),
-#' \code{q} (parameter of conservatism), 
-#' \code{type_level} (), 
-#' \code{type_name} (label attributed to type), 
-#' \code{partition_level} (level of diversity, \emph{i.e.} metacommunity), 
-#' \code{partition_name} (label attributed to partition), and 
-#' \code{diversity}.
-#' 
-#' @references Reeve, R., T. Leinster, C. Cobbold, J. Thompson, N. Brummitt, 
-#' S. Mitchell, and L. Matthews. 2014. How to partition diversity. 
-#' arXiv 1404.6520:1–9.
+#' @return \code{meta_gamma} returns a standard output of class \code{rdiv}
 #' @export
+#'
+#' @references R. Reeve, T. Leinster, C. Cobbold, J. Thompson, N. Brummitt,
+#' S. Mitchell, and L. Matthews. 2016. How to partition diversity.
+#' arXiv 1404.6520v3:1–9.
+#'
 #' @examples
 #' pop <- data.frame(a = c(1,3), b = c(1,1))
 #' row.names(pop) <- paste0("sp", 1:2)

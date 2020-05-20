@@ -9,22 +9,15 @@ raw_sub_alpha(meta, qs)
 \arguments{
 \item{meta}{object of class \code{metacommunity}}
 
-\item{qs}{\code{vector} of \emph{q} values}
+\item{qs}{\code{vector} of mode \code{numeric} containing \emph{q} values}
 }
 \value{
-Returns a standard output of class \code{tibble}, with columns:
-\code{measure}, (raw alpha),
-\code{q} (parameter of conservatism), 
-\code{type_level} (), 
-\code{type_name} (label attributed to type), 
-\code{partition_level} (level of diversity, \emph{i.e.} subcommunity), 
-\code{partition_name} (label attributed to partition), and 
-\code{diversity}.
+\code{raw_sub_alpha} returns a standard output of class \code{rdiv}
 }
 \description{
-Calculates similarity sensitive raw subcommunity alpha diversity (an 
+Calculates similarity sensitive raw subcommunity alpha diversity (an
 estimate of naive-community metacommunity diversity). This measure may be
-calculated for a series of orders, repesented as a vector of \code{qs}.
+calculated for a series of orders, represented as a vector of \code{qs}.
 }
 \examples{
 pop <- data.frame(a = c(1,3), b = c(1,1))
@@ -37,7 +30,7 @@ raw_sub_alpha(meta, 0:2)
 
 }
 \references{
-Reeve, R., T. Leinster, C. Cobbold, J. Thompson, N. Brummitt, 
-S. Mitchell, and L. Matthews. 2016. How to partition diversity. 
+R. Reeve, T. Leinster, C. Cobbold, J. Thompson, N. Brummitt,
+S. Mitchell, and L. Matthews. 2016. How to partition diversity.
 arXiv 1404.6520v3:1–9.
 }

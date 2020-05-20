@@ -10,29 +10,40 @@ Container for class \code{relativeentropy}.
 \section{Fields}{
 
 \describe{
-\item{\code{results}}{object of class \code{matrix} of mode \code{numeric}; contains
-diversity term values output from \code{raw_beta()} or \code{norm_beta()}}
+\item{\code{results}}{\code{data.frame} containing rdiversity output}
 
-\item{\code{measure}}{measure}
+\item{\code{measure}}{object of class \code{character} naming the diversity
+measure being calculated}
 
-\item{\code{type_abundance}}{two-dimensional \code{matrix} of mode \code{numeric}; 
-contains proportional abundance of \emph{types} in the subcommunity 
-as a fraction of the metacommunity as a whole (in the phylogenetic case, 
-this corresponds to the proportional abundance of historic species, which
-is calculated from the proportional abundance of present day species)}
+\item{\code{type_abundance}}{two-dimensional \code{matrix} of mode \code{numeric}
+with rows as types (species), columns as subcommunities, and each
+element containing the relative abundance of types in each subcommunity
+relative to the metacommunity as a whole. In the phylogenetic case, this
+corresponds to the proportional abundance of historical species, which is
+calculated from the proportional abundance of terminal taxa}
 
-\item{\code{ordinariness}}{two-dimensional \code{matrix} of mode \code{numeric}; 
-contains ordinariness of types}
+\item{\code{ordinariness}}{two-dimensional \code{matrix} of mode \code{numeric}
+with rows as types, columns as subcommunities, and elements containing the
+ordinariness of types within subcommunities}
 
-\item{\code{subcommunity_weights}}{\code{vector} of mode \code{numeric}; contains
+\item{\code{subcommunity_weights}}{\code{vector} of mode \code{numeric} containing
 subcommunity weights}
 
-\item{\code{type_weights}}{two-dimensional \code{matrix} of mode \code{numeric}; 
-contains weight of types within a subcommunity}
+\item{\code{type_weights}}{two-dimensional \code{matrix} of mode \code{numeric},
+with rows as types, columns as subcommunities, and elements containing
+weights of types within a subcommunity}
+
+\item{\code{dat_id}}{object of class \code{character} describing the class of
+distance / similarity being used, e.g. "naive", "taxonomic", and so on}
+
+\item{\code{similarity_components}}{list containing the components necessary to
+calculate similarity. This list is empty when \code{precompute_dist = TRUE}
+when calculating distance. When a pairwise distance matrix is too large and
+\code{precompute_dist = FALSE}, this list contains all the information
+required to calculate pairwise distance between types}
+
+\item{\code{similarity_parameters}}{list containing parameters associated with
+converting pairwise distances to similarities (the \code{dist2sim()}
+arguments)}
 }}
 
-\references{
-Reeve, R., T. Leinster, C. Cobbold, J. Thompson, N. Brummitt, 
-S. Mitchell, and L. Matthews. 2014. How to partition diversity. 
-arXiv 1404.6520:1–9.
-}

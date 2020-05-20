@@ -1,80 +1,66 @@
-setOldClass("phylo")
-
-#' Coerce to \code{metacommunity}
+#' Metacommunity
 #'
-#' Functions to check if an object is a \code{metacommunity} or coerce an
-#' object into a \code{metacommunity}.
+#' Functions to generate a \code{metacommunity} object.
 #'
-#' When calculating phylogenetic diversity either:
-#' \itemize{
-#' \item set \code{partition} as the relative abundance of present-day species,  
-#' with \code{similarity} as an object of class \code{phylo}, from which the 
-#' relative abundance and pairwise similarity of historical species will be
-#' calculated; or
-#' \item set \code{partition} as the relative abundance of historical species,
-#' with \code{similarity} as the pairwise similarity of historical species.
-#' }
-#' 
-#' @field type_abundance two-dimensional \code{matrix} of mode \code{numeric}  
-#' with rows as types, columns as subcommunities, and elements containing  
-#' relative abundances of types in subcommunities.  In the phylogenetic case, 
-#' this corresponds to the proportional abundance of historic species, which
-#' is calculated from the proportional abundance of present day species.
-#' @field similarity two-dimensional \code{matrix} of mode \code{numeric} with 
-#' rows as types, columns as types, and elements containing pairwise 
+#' @param partition two-dimensional \code{matrix} of mode \code{numeric}
+#' with rows as types, columns as subcommunities, and elements containing
+#' the relative abundances of types in subcommunities. For phylogenetic
+#' diversity, see \emph{Details}
+#' @param similarity (optional) object of class \code{similarity}
+#'
+#' @field type_abundance two-dimensional \code{matrix} of mode \code{numeric}
+#' with rows as types (species), columns as subcommunities, and each
+#' element containing the relative abundance of types in each subcommunity
+#' relative to the metacommunity as a whole. In the phylogenetic case, this
+#' corresponds to the proportional abundance of historical species, which is
+#' calculated from the proportional abundance of terminal taxa
+#' @field similarity two-dimensional \code{matrix} of mode \code{numeric} with
+#' rows as types, columns as types, and elements containing pairwise
 #' similarities between types
-#' @field ordinariness two-dimensional \code{matrix} of mode \code{numeric} 
+#' @field similarity_components list containing the components necessary to
+#' calculate similarity. This list is empty when \code{precompute_dist = TRUE}
+#' when calculating distance. When a pairwise distance matrix is too large and
+#' \code{precompute_dist = FALSE}, this list contains all the information
+#' required to calculate pairwise distance between types
+#' @field similarity_parameters list containing parameters associated with
+#' converting pairwise distances to similarities (the \code{dist2sim()}
+#' arguments)
+#' @field ordinariness two-dimensional \code{matrix} of mode \code{numeric}
 #' with rows as types, columns as subcommunities, and elements containing the
-#' ordinariness of types within subcommunities 
-#' @field subcommunity_weights \code{vector} of mode \code{numeric}; contains
+#' ordinariness of types within subcommunities
+#' @field subcommunity_weights \code{vector} of mode \code{numeric} containing
 #' subcommunity weights
-#' @field type_weights two-dimensional \code{matrix} of mode \code{numeric}, 
-#' with rows as types, columns as subcommunities, and elements containing 
+#' @field type_weights two-dimensional \code{matrix} of mode \code{numeric},
+#' with rows as types, columns as subcommunities, and elements containing
 #' weights of types within a subcommunity
-#' @field raw_abundance [Phylogenetic] two-dimensional \code{matrix} of mode 
-#' \code{numeric} with rows as types, columns as subcommunities, and elements 
+#' @field dat_ID object of class \code{character} denoting the type of diversity
+#' being calculated. This can be "naive", "genetic", "taxonomic", and so on
+#' @field raw_abundance [Phylogenetic] two-dimensional \code{matrix} of mode
+#' \code{numeric} with rows as types, columns as subcommunities, and elements
 #' containing the relative abundance of present day species
-#' @field raw_structure [Phylogenetic] two-dimensional \code{matrix} of mode 
-#' \code{numeric} with rows as historical species, columns as present day 
+#' @field raw_structure [Phylogenetic] two-dimensional \code{matrix} of mode
+#' \code{numeric} with rows as historical species, columns as present day
 #' species, and elements containing historical species lengths within lineages
-#' @field parameters [Phylogenetic] \code{tibble} containing parameters 
+#' @field parameters [Phylogenetic] \code{data.frame} containing parameters
 #' associated with each historic species in the phylogeny
 #'
+#' @return \code{metacommunity()} returns an object of class
+#' \code{metacommunity} (see \emph{Fields}).
 #' @name metacommunity
 #' @rdname metacommunity-methods
-#' @include class-metacommunity.R check_partition.R check_similarity.R
 #' @exportMethod metacommunity
-#'
-#' @param partition two-dimensional \code{matrix} of mode \code{numeric}  
-#' with rows as types, columns as subcommunities, and elements containing  
-#' the relative abundances of types in subcommunities. For phylogenetic 
-#' diversity, see \emph{Details}.
-#' @param similarity (optional) two-dimensional \code{matrix} of mode 
-#' \code{numeric}, with rows as types, columns as types, and elements 
-#' containing the pairwise similarity between types. For phylogenetic 
-#' diversity, see \emph{Details}.
-#' @param ... (optional) additional arguments, especially:
-#' @param depth (optional; and for phylogenetic metacommunities only) how
-#' much evolutionary history should be retained, with 0 marking the most
-#' recent present-day species, and 1 (the default) marking the most recent 
-#' common ancestor. Numbers greater than 1 extend the root of the tree.
-#'
-#' @return Returns an object of class \code{metacommunity} (see \emph{Fields}).
 #'
 #' @seealso \code{\link{metacommunity-class}}
 #'
 #' @examples
-#' tree <- ape::rtree(n = 5)
-#' tree$tip.label <- paste0("sp", seq_along(tree$tip.label))
+#' # Naive-type
 #' partition <- cbind(a = c(1,1,1,0,0), b = c(0,1,0,1,1))
-#' row.names(partition) <- tree$tip.label
+#' row.names(partition) <- paste0("sp", 1:5)
 #' partition <- partition / sum(partition)
-#' 
-#' a <- metacommunity(partition, tree)
-#' b <- metacommunity(partition)
-#' 
+#' meta <- metacommunity(partition)
+#'
 setGeneric(name = "metacommunity",
-           def = function(partition, similarity, ...) {
+           def = function(partition, similarity) {
              standardGeneric("metacommunity")
            } )
 
@@ -87,195 +73,234 @@ setMethod(f = "metacommunity",
           definition = function(partition) {
             # If similarity is data.frame, convert to matrix
             partition <- as.matrix(partition)
-            
+
             metacommunity(partition)
           } )
 
 
 #' @rdname metacommunity-methods
 #' @aliases metacommunity,numeric-method
-#' @export
 #'
 setMethod(f = "metacommunity",
           signature(partition = "numeric", similarity = "missing"),
           definition = function(partition) {
             # If similarity is numeric/vector, convert to matrix
             partition <- as.matrix(partition)
-            
+
             metacommunity(partition)
           } )
 
 
 #' @rdname metacommunity-methods
 #' @aliases metacommunity,matrix-method
-#' @export
 #'
 setMethod(f = "metacommunity",
           signature(partition = "matrix", similarity = "missing"),
           definition = function(partition) {
             # If similarity is not input, create identity matrix
-            similarity <- diag(1, nrow(partition))
-            row.names(similarity) <- row.names(partition)
-            colnames(similarity) <- row.names(partition)
-            
+            Z <- diag(1, nrow(partition))
+            row.names(Z) <- row.names(partition)
+            colnames(Z) <- row.names(partition)
+
+            similarity <- new("similarity",
+                              similarity = Z,
+                              dat_id = "naive",
+                              parameters = list(transform = NA,
+                                                k = NA,
+                                                normalise = NA,
+                                                max_d = NA))
+
             metacommunity(partition, similarity)
           } )
 
 
 #' @rdname metacommunity-methods
 #' @aliases metacommunity,data.frame-method,matrix-method
-#' @export
 #'
 setMethod(f = "metacommunity",
           signature(partition = "data.frame", similarity = "matrix"),
           definition = function(partition, similarity) {
             # If similarity is data.frame, convert to matrix
             partition <- as.matrix(partition)
-            
+
             metacommunity(partition, similarity)
           } )
 
 
 #' @rdname metacommunity-methods
 #' @aliases metacommunity,numeric-method,matrix-method
-#' @export
 #'
 setMethod(f = "metacommunity",
           signature(partition = "numeric", similarity = "matrix"),
           definition = function(partition, similarity) {
             # If similarity is numeric/vector, convert to matrix
             partition <- as.matrix(partition)
-            
+
             metacommunity(partition, similarity)
           } )
 
 
 #' @rdname metacommunity-methods
 #' @aliases metacommunity,matrix-method
-#' @export
 #'
 setMethod(f = "metacommunity",
           signature(partition = "matrix", similarity = "matrix"),
           definition = function(partition, similarity) {
-            # Check partition and simliarity matrices
-            type_abundance <- check_partition(partition)
-            similarity <- check_similarity(partition, similarity)
-            
-            # Calculate parameters
-            subcommunity_weights <- colSums(type_abundance) /
-              sum(type_abundance)
-            type_weights <- apply(type_abundance, 2, function(x) x/sum(x))
-            Zp.j <- similarity %*% type_abundance
-            
-            # Mark all of the species that have nothing similar as NaNs
-            # because diversity of an empty group is undefined
-            Zp.j[Zp.j==0] <- NaN
-            
-            if(!is.matrix(type_weights)) {
-              type_weights<- t(as.matrix(type_weights))
-              row.names(type_weights) <- row.names(type_abundance)
-            }
-            
-            new('metacommunity', 
-                type_abundance = type_abundance,
-                similarity = similarity,
-                ordinariness = Zp.j,
-                subcommunity_weights = subcommunity_weights,
-                type_weights = type_weights)
+
+            stop("This function no longer accepts matrix objects within the `similarity` argument. Instead, use dist2sim() to generate similarity objects.")
+
           } )
 
 
 #' @rdname metacommunity-methods
-#' @aliases metacommunity,phylo-method
-#' @export
+#' @aliases metacommunity,similarity-method
 #'
 setMethod(f = "metacommunity",
-          signature(partition = "missing", similarity = "phylo"),
-          definition = function(partition, similarity, depth = 1) {
-            # If pds.abundance is not entered, assume an even distribution
+          signature(partition = "missing", similarity = "similarity"),
+          definition = function(partition, similarity) {
+            # If partition is missing, assume an even distribution
             tips <- similarity$tip.label
-            partition <- matrix(rep(1/length(tips), length(tips)))
+            partition <- matrix(rep(1 / length(tips), length(tips)))
             row.names(partition) <- tips
             colnames(partition) <- "sc1"
-            
-            metacommunity(partition, similarity, depth)
+
+            metacommunity(partition, similarity)
           } )
 
 
 #' @rdname metacommunity-methods
-#' @aliases metacommunity,numeric-method,phylo-method
-#' @export
+#' @aliases metacommunity,similarity-method
 #'
 setMethod(f = "metacommunity",
-          signature(partition = "numeric", similarity = "phylo"),
-          definition = function(partition, similarity, depth = 1) {
+          signature(partition = "numeric", similarity = "similarity"),
+          definition = function(partition, similarity) {
             partition <- as.matrix(partition)
-            
-            metacommunity(partition, similarity, depth)            
+
+            metacommunity(partition, similarity)
           } )
 
 
 #' @rdname metacommunity-methods
-#' @aliases metacommunity,data.frame-method,phylo-method
-#' @export
+#' @aliases metacommunity,similarity-method
 #'
 setMethod(f = "metacommunity",
-          signature(partition = "data.frame", similarity = "phylo"),
-          definition = function(partition, similarity, depth = 1) {
+          signature(partition = "data.frame", similarity = "similarity"),
+          definition = function(partition, similarity) {
             partition <- as.matrix(partition)
-            
-            metacommunity(partition, similarity, depth)            
+
+            metacommunity(partition, similarity)
           } )
 
 
 #' @rdname metacommunity-methods
-#' @aliases metacommunity,matrix-method,phylo-method
-#' @export
+#' @aliases metacommunity,similarity-method
 #'
 setMethod(f = "metacommunity",
-          signature(partition = "matrix", similarity = "phylo"),
-          definition = function(partition, similarity, depth = 1) {
-            ps <- phy_struct(tree = similarity, partition = partition)
-            
-            chainsaw(partition = partition, ps = ps, depth = depth)
+          signature(partition = "matrix", similarity = "similarity"),
+          definition = function(partition, similarity) {
+
+            # If a similarity matrix is available (within the similarity
+            # object), then generate a metacommunity object in the normal way
+            if (length(similarity@similarity) != 0) {
+
+              # Check partition and simliarity matrices
+              type_abundance <- check_partition(partition)
+              Z <- similarity@similarity
+              Z <- check_similarity(Z, partition)
+
+              # Calculate parameters
+              subcommunity_weights <- colSums(type_abundance) /
+                sum(type_abundance)
+              type_weights <- apply(type_abundance, 2, function(x) x / sum(x))
+              Zp.j <- Z %*% type_abundance
+
+              # Mark all of the species that have nothing similar as NaNs
+              # because diversity of an empty group is undefined
+              Zp.j[Zp.j == 0] <- NaN
+
+              if (!is.matrix(type_weights)) {
+                type_weights <- t(as.matrix(type_weights))
+                row.names(type_weights) <- row.names(type_abundance)
+              }
+
+              return(new("metacommunity",
+                  type_abundance = type_abundance,
+                  similarity = Z,
+                  ordinariness = Zp.j,
+                  subcommunity_weights = subcommunity_weights,
+                  type_weights = type_weights,
+                  dat_id = similarity@dat_id,
+                  similarity_components = similarity@components,
+                  similarity_parameters = similarity@parameters))
+
+              # .. else calculate branch-based phylogenetic similarity and
+              # generate a metacommunity object in the normal way
+            }else if (similarity@dat_id == "phybranch") {
+
+              components <- similarity@components
+              ps <- phy_struct(components$tree, partition)
+              return(chainsaw(partition = partition,
+                              ps = ps,
+                              depth = components$tree_depth))
+
+              # .. otherwise calculate ordinariness line by line and generate
+              # a metacommunity object in the normal way
+            }else {
+
+              components <- similarity@components
+
+              # Calculate parameters
+              type_abundance <- check_partition(partition)
+              subcommunity_weights <- colSums(type_abundance) /
+                sum(type_abundance)
+              type_weights <- apply(type_abundance, 2, function(x) x / sum(x))
+
+              Zp.j <- lapply(seq_len(nrow(type_abundance)), function(x) {
+                tmp <- get(components$ordinariness)(similarity, x)
+                tmp <- matrix(tmp, nrow = 1)
+                tmp %*% type_abundance
+              })
+
+              Zp.j <- do.call(rbind.data.frame, Zp.j)
+              row.names(Zp.j) <- row.names(partition)
+
+              # Mark all of the species that have nothing similar as NaNs
+              # because diversity of an empty group is undefined
+              Zp.j[Zp.j == 0] <- NaN
+              Zp.j <- as.matrix(Zp.j)
+
+              if (!is.matrix(type_weights)) {
+                type_weights <- t(as.matrix(type_weights))
+                row.names(type_weights) <- row.names(type_abundance)
+              }
+
+              return(new("metacommunity",
+                         type_abundance = type_abundance,
+                         ordinariness = Zp.j,
+                         subcommunity_weights = subcommunity_weights,
+                         type_weights = type_weights,
+                         dat_id = similarity@dat_id,
+                         similarity_components = similarity@components,
+                         similarity_parameters = similarity@parameters))
+            }
           } )
 
 
+
 #' @rdname metacommunity-methods
-#' @param x any R object
-#' @return
-#' Returns TRUE if its argument is a metacommunity, FALSE otherwise.
-#' @export
+#' @aliases metacommunity,similarity-method
 #'
-is.metacommunity <- function (x)
-  inherits(x, "metacommunity")
+setMethod(f = "metacommunity",
+          signature(partition = "ANY", similarity = "phylo"),
+          definition = function(partition, similarity) {
+            stop("This function no longer accepts phylo objects within the `similarity` argument. Instead, generate an object of class `distance` using phy2branch() or phy2dist(), and convert this object to an object of class `similarity` using dist2sim().")
+          } )
 
 
 #' @rdname metacommunity-class
 #' @param object object of class \code{metacommunity}
 #'
-setMethod(f = "show", signature= "metacommunity",
+setMethod(f = "show", signature = "metacommunity",
           definition = function(object) {
-            cat('Object of class metacommunity, containing:\n')
-            cat('@type_abundance: Matrix of relative abundances (', 
-                ncol(object@type_abundance), 'subcommunities,',
-                nrow(object@type_abundance), 'types )\n')
-            cat('@similarity: Similarity matrix\n')
-            cat('@ordinariness: Matrix of type ordinariness\n')
-            cat('@subcommunity_weights: Vector of subcommunity weights\n')
-            cat('@type_weights: Vector of type weights\n')
-            
-            if(!isTRUE(all.equal(0, length(object@raw_abundance))))
-              cat('@raw_abundance: Matrix of (phylo) tip relative abundances (',
-                  ncol(object@raw_abundance), 'subcommunities,',
-                  nrow(object@raw_abundance), 'terminal taxa )\n')
-            
-            if(!isTRUE(all.equal(0, length(object@raw_structure))))
-              cat('@raw_structure: Matrix of (phylo) structure (',
-                  sum(colSums(object@raw_structure) > 0), 'tips,',
-                  sum(rowSums(object@raw_structure) > 0), 'historical species )\n')
-            
-            if(!isTRUE(all.equal(0, length(object@parameters))))
-              cat('@parameters: Parameters associated with (phylo) historical species\n')
+            cat("Object of class `metacommunity`, containing all of the data required to calculate diversity.")
           } )
-

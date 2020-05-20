@@ -29,3 +29,15 @@ Changes:
 
 *  Fix problems that occur when user doesn't have row names in the partition object
 *  Update citation
+
+
+rdiversity v2.0
+=================
+
+Changes:
+
+*  Standardised metacommunity input
+*  New functions added to calculate various similarity matrices
+
+
+
