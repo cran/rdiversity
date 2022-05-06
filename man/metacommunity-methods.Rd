@@ -8,17 +8,11 @@
 \alias{metacommunity,numeric-method}
 \alias{metacommunity,matrix,missing-method}
 \alias{metacommunity,matrix-method}
-\alias{metacommunity,data.frame,matrix-method}
-\alias{metacommunity,data.frame-method,matrix-method}
-\alias{metacommunity,numeric,matrix-method}
-\alias{metacommunity,numeric-method,matrix-method}
-\alias{metacommunity,matrix,matrix-method}
 \alias{metacommunity,missing,similarity-method}
 \alias{metacommunity,similarity-method}
 \alias{metacommunity,numeric,similarity-method}
 \alias{metacommunity,data.frame,similarity-method}
 \alias{metacommunity,matrix,similarity-method}
-\alias{metacommunity,ANY,phylo-method}
 \title{Metacommunity}
 \usage{
 metacommunity(partition, similarity)
@@ -29,12 +23,6 @@ metacommunity(partition, similarity)
 
 \S4method{metacommunity}{matrix,missing}(partition)
 
-\S4method{metacommunity}{data.frame,matrix}(partition, similarity)
-
-\S4method{metacommunity}{numeric,matrix}(partition, similarity)
-
-\S4method{metacommunity}{matrix,matrix}(partition, similarity)
-
 \S4method{metacommunity}{missing,similarity}(partition, similarity)
 
 \S4method{metacommunity}{numeric,similarity}(partition, similarity)
@@ -42,8 +30,6 @@ metacommunity(partition, similarity)
 \S4method{metacommunity}{data.frame,similarity}(partition, similarity)
 
 \S4method{metacommunity}{matrix,similarity}(partition, similarity)
-
-\S4method{metacommunity}{ANY,phylo}(partition, similarity)
 }
 \arguments{
 \item{partition}{two-dimensional \code{matrix} of mode \code{numeric}
